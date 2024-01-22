@@ -6,10 +6,10 @@ const input = require('readline-sync');
 let candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
 let question = "Who was the first American woman in space? ";
-let questionTwo = "True or false: 5 kilometer == 5000 meters? ";
-let questionThree = "(5 + 3)/2 * 10 = ? ";
-let questionFour = "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ";
-let questionFive = "What is the minimum crew size for the ISS? ";
+// let questionTwo = "True or false: 5 kilometer == 5000 meters? ";
+// let questionThree = "(5 + 3)/2 * 10 = ? ";
+// let questionFour = "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ";
+// let questionFive = "What is the minimum crew size for the ISS? ";
 
 let correctAnswer = "Sally Ride";
 // let correctAnsTwo = "true";
@@ -21,7 +21,7 @@ let candidateAnswer = "";
 
 
 //TODO: Variables for Part 2
-let questions = [question, questionTwo, questionThree, questionFour, questionFive];
+let questions = ["Who was the first American woman in space? ", "True or false: 5 kilometer == 5000 meters? ", "(5 + 3)/2 * 10 = ? ", "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "What is the minimum crew size for the ISS? "];
 let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"];
 let candidateAnswers = [];
 
@@ -33,7 +33,7 @@ function askForName() {
 
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
-  for (i = 0; i < questions.length; i++) {
+  for (let i = 0; i < questions.length; i++) {
     candidateAnswer = input.question(questions[i]);
     candidateAnswers.push(candidateAnswer);
   }
@@ -42,11 +42,6 @@ function askQuestion() {
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-// if(candidateAnswer === correctAnswer){
-//   console.log("Correct answer!");
-// } else {
-//   console.log("Incorrect answer.");
-// }
 
 let feedback = `1) Your Answer: ${candidateAnswers[0]}
 Correct Answer: ${correctAnswers[0]}
@@ -65,8 +60,24 @@ Correct Answer: ${correctAnswers[4]}`
 
 console.log(feedback);
 
-  let grade;  //TODO 3.2 use this variable to calculate the candidates score.
+  let grade = 0, numCorrectAns = [];  //TODO 3.2 use this variable to calculate the candidates score.
+  
+  candidateAnswers.splice(0, 1, candidateAnswers[0].toLowerCase());
+  candidateAnswers.splice(1, 1, candidateAnswers[1].toLowerCase());
+  candidateAnswers.splice(3, 1, candidateAnswers[3].toLowerCase());
 
+  correctAnswers.splice(0, 1, correctAnswers[0].toLowerCase());
+  correctAnswers.splice(1, 1, correctAnswers[1].toLowerCase());
+  correctAnswers.splice(3, 1, correctAnswers[3].toLowerCase());
+
+  for (let i = 0; candidateAnswers[i]; i++) {
+    if (candidateAnswers[i] === correctAnswers[i]) {
+      numCorrectAns.push(candidateAnswers[i] === correctAnswers[i]);
+    }
+  }
+
+  grade = (numCorrectAns.length / questions.length) * 100;
+  console.log(`${grade}%`);
 
   return grade;
 }
