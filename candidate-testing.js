@@ -5,26 +5,12 @@ const input = require('readline-sync');
 // TODO 1.1a: Define candidateName // 
 let candidateName = "";
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
-let question = "Who was the first American woman in space? ";
-// let questionTwo = "True or false: 5 kilometer == 5000 meters? ";
-// let questionThree = "(5 + 3)/2 * 10 = ? ";
-// let questionFour = "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ";
-// let questionFive = "What is the minimum crew size for the ISS? ";
-
-let correctAnswer = "Sally Ride";
-// let correctAnsTwo = "true";
-// let correctAnsThree = "40";
-// let correctAnsFour = "Trajectory";
-// let correctAnsFive = 3;
-
-let candidateAnswer = "";
-
+let question = "Who was the first American woman in space? ", correctAnswer = "Sally Ride", candidateAnswer = "";
 
 //TODO: Variables for Part 2
 let questions = ["Who was the first American woman in space? ", "True or false: 5 kilometer == 5000 meters? ", "(5 + 3)/2 * 10 = ? ", "Given the array [8, 'Orbit', 'Trajectory', 45], what entry is at index 2? ", "What is the minimum crew size for the ISS? "];
 let correctAnswers = ["Sally Ride", "true", "40", "Trajectory", "3"];
 let candidateAnswers = [];
-
 
 function askForName() {
   // TODO 1.1b: Ask for candidate's name //
@@ -43,19 +29,24 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-let feedback = `1) Your Answer: ${candidateAnswers[0]}
+let feedback = `1) ${questions[0]}
+Your Answer: ${candidateAnswers[0]}
 Correct Answer: ${correctAnswers[0]}
 
-2) Your Answer: ${candidateAnswers[1]}
+2) ${questions[1]} 
+Your Answer: ${candidateAnswers[1]}
 Correct Answer: ${correctAnswers[1]}
 
-3) Your Answer: ${candidateAnswers[2]}
+3) ${questions[2]} 
+Your Answer: ${candidateAnswers[2]}
 Correct Answer: ${correctAnswers[2]}
 
-4) Your Answer: ${candidateAnswers[3]}
+4) ${questions[3]} 
+Your Answer: ${candidateAnswers[3]}
 Correct Answer: ${correctAnswers[3]}
 
-5) Your Answer: ${candidateAnswers[4]}
+5) ${questions[4]} 
+Your Answer: ${candidateAnswers[4]}
 Correct Answer: ${correctAnswers[4]}`
 
 console.log(feedback);
@@ -77,7 +68,15 @@ console.log(feedback);
   }
 
   grade = (numCorrectAns.length / questions.length) * 100;
-  console.log(`${grade}%`);
+  let candidateStatus = "";
+  if (grade >= 80) {
+    candidateStatus = "PASSED";
+  } else {
+    candidateStatus = "FAILED";
+  }
+
+console.log(`>>> Overall Grade: ${grade}% (${numCorrectAns.length} of ${questions.length} reponses correct) <<<
+>>> Status: ${candidateStatus} <<<`);
 
   return grade;
 }
@@ -85,7 +84,7 @@ console.log(feedback);
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Hello, " + candidateName + "!");
+   console.log("Candidate Name: " + candidateName);
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
