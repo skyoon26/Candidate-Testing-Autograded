@@ -29,7 +29,8 @@ function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
 
-let feedback = `1) ${questions[0]}
+let feedback = `Candidate Name: ${candidateName}
+1) ${questions[0]}
 Your Answer: ${candidateAnswers[0]}
 Correct Answer: ${correctAnswers[0]}
 
@@ -84,7 +85,7 @@ console.log(`>>> Overall Grade: ${grade}% (${numCorrectAns.length} of ${question
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Candidate Name: " + candidateName);
+   console.log("Welcome " + candidateName+"!");
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
