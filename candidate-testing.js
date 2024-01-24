@@ -20,8 +20,7 @@ function askForName() {
 function askQuestion() {
   // TODO 1.2b: Ask candidate the question and assign the response as candidateAnswer //
   for (let i = 0; i < questions.length; i++) {
-    candidateAnswer = input.question(questions[i]);
-    candidateAnswers.push(candidateAnswer);
+    candidateAnswers.push(input.question(questions[i]));
   }
 }
 
@@ -52,7 +51,7 @@ Correct Answer: ${correctAnswers[4]}`
 
 console.log(feedback);
 
-  let grade = 0, numCorrectAns = [];  //TODO 3.2 use this variable to calculate the candidates score.
+  let grade = "", numCorrectAns = [];  //TODO 3.2 use this variable to calculate the candidates score.
   
   candidateAnswers.splice(0, 1, candidateAnswers[0].toLowerCase());
   candidateAnswers.splice(1, 1, candidateAnswers[1].toLowerCase());
@@ -62,7 +61,7 @@ console.log(feedback);
   correctAnswers.splice(1, 1, correctAnswers[1].toLowerCase());
   correctAnswers.splice(3, 1, correctAnswers[3].toLowerCase());
 
-  for (let i = 0; candidateAnswers[i]; i++) {
+  for (let i = 0; i < candidateAnswers.length; i++) {
     if (candidateAnswers[i] === correctAnswers[i]) {
       numCorrectAns.push(candidateAnswers[i] === correctAnswers[i]);
     }
@@ -85,7 +84,7 @@ console.log(`>>> Overall Grade: ${grade}% (${numCorrectAns.length} of ${question
 function runProgram() {
   askForName();
   // TODO 1.1c: Greet candidate using their name //
-   console.log("Welcome " + candidateName+"!");
+   console.log("Welcome, " + candidateName+"!");
   askQuestion();
   gradeQuiz(this.candidateAnswers);
 }
