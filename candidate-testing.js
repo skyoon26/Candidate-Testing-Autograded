@@ -25,49 +25,23 @@ function askQuestion() {
 }
 
 function gradeQuiz(candidateAnswers) {
-
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
+let feedback = "";
 
-let feedback = `Candidate Name: ${candidateName}
-1) ${questions[0]}
-Your Answer: ${candidateAnswers[0]}
-Correct Answer: ${correctAnswers[0]}
+console.log(`Candidate Name: ${candidateName}`);
 
-2) ${questions[1]} 
-Your Answer: ${candidateAnswers[1]}
-Correct Answer: ${correctAnswers[1]}
+  for (let i = 0; i < candidateAnswers.length; i ++) {
+  console.log(`${i+1}) ${questions[i]}${"\n"}Your Answer: ${candidateAnswers[i]}${"\n"}Correct Answer: ${correctAnswers[i]}${"\n"}`);
+  }
 
-3) ${questions[2]} 
-Your Answer: ${candidateAnswers[2]}
-Correct Answer: ${correctAnswers[2]}
-
-4) ${questions[3]} 
-Your Answer: ${candidateAnswers[3]}
-Correct Answer: ${correctAnswers[3]}
-
-5) ${questions[4]} 
-Your Answer: ${candidateAnswers[4]}
-Correct Answer: ${correctAnswers[4]}`
-
-console.log(feedback);
-
-  let grade = "", numCorrectAns = [];  //TODO 3.2 use this variable to calculate the candidates score.
-  
-  candidateAnswers.splice(0, 1, candidateAnswers[0].toLowerCase());
-  candidateAnswers.splice(1, 1, candidateAnswers[1].toLowerCase());
-  candidateAnswers.splice(3, 1, candidateAnswers[3].toLowerCase());
-
-  correctAnswers.splice(0, 1, correctAnswers[0].toLowerCase());
-  correctAnswers.splice(1, 1, correctAnswers[1].toLowerCase());
-  correctAnswers.splice(3, 1, correctAnswers[3].toLowerCase());
-
+  let grade = "", numCorrectAns = 0;  //TODO 3.2 use this variable to calculate the candidates score.
   for (let i = 0; i < candidateAnswers.length; i++) {
-    if (candidateAnswers[i] === correctAnswers[i]) {
-      numCorrectAns.push(candidateAnswers[i] === correctAnswers[i]);
+    if (candidateAnswers[i].toLowerCase() === correctAnswers[i].toLowerCase()) {
+      numCorrectAns = numCorrectAns+=1;
     }
   }
 
-  grade = (numCorrectAns.length / questions.length) * 100;
+  grade = (numCorrectAns / questions.length) * 100;
   let candidateStatus = "";
   if (grade >= 80) {
     candidateStatus = "PASSED";
@@ -75,7 +49,7 @@ console.log(feedback);
     candidateStatus = "FAILED";
   }
 
-console.log(`>>> Overall Grade: ${grade}% (${numCorrectAns.length} of ${questions.length} reponses correct) <<<
+console.log(`>>> Overall Grade: ${grade}% (${numCorrectAns} of ${questions.length} reponses correct) <<<
 >>> Status: ${candidateStatus} <<<`);
 
   return grade;
